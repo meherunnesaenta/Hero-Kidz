@@ -1,9 +1,43 @@
+import Banner from "@/components/home/Banner";
+import Products from "@/components/home/Products";
 import Image from "next/image";
+import { Suspense } from "react";
+// app/page.tsx  (Homepage)
 
+
+export const metadata = {
+  title: 'Hero Kidz - শিশুদের সেরা খেলনা ও শিক্ষামূলক পণ্য',
+  description: 'আমাদের হোমপেজে দেখুন সুপারহিরো কস্টিউম, লার্নিং বোর্ড, ফ্ল্যাশ কার্ড, ডাক্তার সেট এবং আরও অনেক মজার পণ্য। শিশুদের কল্পনা ও শেখার জন্য পারফেক্ট!',
+  openGraph: {
+    title: 'Hero Kidz - Fun Learning Starts Here',
+    description: 'Explore our collection of educational toys, costumes, and creative tools for kids.',
+    images: [
+      {
+        url: 'https://i.ibb.co.com/DPSvZ6Kq/image.png', // homepage image
+        width: 1200,
+        height: 630,
+        alt: 'Hero Kidz Homepage Preview',
+      },
+    ],
+    url: 'https://yourdomain.com',
+  },
+  twitter: {
+    images: ['https://i.ibb.co.com/DPSvZ6Kq/image.png'],
+  },
+};
+
+// ... rest of your page component
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-
+    <div className='space-y-12'>
+        <section>
+            <Banner></Banner>
+        </section>
+        <section>
+            <Suspense >
+                <Products></Products>
+            </Suspense>
+        </section>
     </div>
   );
 }

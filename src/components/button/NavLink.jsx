@@ -5,9 +5,9 @@ import { usePathname } from 'next/navigation';
 
 const NavLink = ({location,children}) => {
     const path =usePathname();
-    const isActive = location=='/' ? path=='/':path.startsWith(location)
+  
   return (
-    <Link href={location} className={`${isActive&& "text-primary"} font-bold`} >{children}</Link>
+    <Link href={location} className={`${ path.startsWith(location) && "text-primary"} font-bold`} >{children}</Link>
   );
 };
 

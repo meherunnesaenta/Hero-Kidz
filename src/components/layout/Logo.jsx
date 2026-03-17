@@ -10,6 +10,8 @@ const Logo = () => {
         alt="hero kidz Logo"
         width={50}
         height={40}
+        className="w-12 h-auto"
+        priority
         />
 
         <div className='font-bold'> Hero <span className='text-primary'>Kidz</span></div>
