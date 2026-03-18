@@ -19,7 +19,7 @@ export const metadata = {
         alt: 'Hero Kidz Homepage Preview',
       },
     ],
-    url: 'https://yourdomain.com',
+    url: 'https://hero-kidz-coral.vercel.app/',
   },
   twitter: {
     images: ['https://i.ibb.co.com/DPSvZ6Kq/image.png'],

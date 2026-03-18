@@ -10,7 +10,7 @@ export const metadata = {
     description: 'Find the perfect toy for learning, play, and imagination.',
     images: [
       {
-        url: 'https://i.ibb.co.com/8DbHt2vj/image.png', // তোমার product page screenshot
+        url: 'https://i.ibb.co.com/8DbHt2vj/image.png', 
         width: 1200,
         height: 630,
         alt: 'Hero Kidz Product Collection',

@@ -42,7 +42,7 @@ export const metadata = {
     title: 'Hero Kidz - Fun & Learning Toys for Children',
     description:
       'Discover safe, non-toxic educational toys, costumes, and creative play items for kids. Perfect for birthdays, parties, and imaginative learning!',
-    url: 'https://yourdomain.com', // তোমার আসল ডোমেইন দাও (localhost-এ test করলে পরে চেঞ্জ করো)
+    url: 'https://hero-kidz-coral.vercel.app/', // তোমার আসল ডোমেইন দাও (localhost-এ test করলে পরে চেঞ্জ করো)
     siteName: 'Hero Kidz',
     images: [
       {
