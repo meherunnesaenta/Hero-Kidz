@@ -5,7 +5,12 @@ import { ObjectId } from "mongodb";
 
 export const getProducts =async()=>{
     const products =await connect(collections.PRODUCTS).find().toArray();
-    return products
+       const safeProducts = products.map(product => ({
+        ...product,
+        _id: product._id.toString(), 
+    }));
+
+    return safeProducts;
 }
 
 export const getSingleProducts =async(id)=>{

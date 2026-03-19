@@ -1,6 +1,8 @@
 'use client'
 import React, { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { signIn } from "next-auth/react";
+import SocialButton from '@/components/button/SocialButton';
 
 const Login = () => {
   const router = useRouter();
@@ -15,18 +17,19 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    if (email === 'test@gmail.com' && password === '123456') {
-      router.push(callbackUrl);
-    } else {
-      setError('Invalid email or password');
-    }
+    signIn('credentials', {
+      email: e.target.email.value,
+      password: e.target.password.value,
+      redirect:false
+    },
+    )
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[oklch(97%_0.01_95)]">
-      
+
       <div className="w-full max-w-md p-8 rounded-2xl shadow-lg bg-white">
-        
+
         <h2 className="text-2xl font-bold text-center mb-6 text-[oklch(35%_0.01_260)]">
           Login
         </h2>
@@ -35,6 +38,7 @@ const Login = () => {
 
           <input
             type="email"
+            name="email"
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[oklch(65%_0.23_35)]"
             placeholder="Email"
             value={email}
@@ -44,6 +48,7 @@ const Login = () => {
 
           <input
             type="password"
+            name="password"
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[oklch(65%_0.23_35)]"
             placeholder="Password"
             value={password}
@@ -64,11 +69,21 @@ const Login = () => {
           </button>
         </form>
 
+        {/* 🔹 Divider */}
+        <div className="my-4 flex items-center gap-2">
+          <div className="flex-1 h-px bg-gray-300"></div>
+          <span className="text-sm text-gray-500">OR</span>
+          <div className="flex-1 h-px bg-gray-300"></div>
+        </div>
+
+        {/* 🔥 Google Sign In Button */}
+          <SocialButton></SocialButton>
+
         {/* 🔁 Toggle to Register */}
         <p className="text-sm text-center mt-4">
           Don't have an account?{' '}
           <span
-            onClick={() => router.push('/register')}
+            onClick={() => router.push(`/register?callbackUrl=${callbackUrl}`)}
             className="text-[oklch(65%_0.23_35)] font-semibold cursor-pointer"
           >
             Register

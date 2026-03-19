@@ -1,7 +1,8 @@
 'use client'
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { postUser } from '@/actions/server/auth';
+import { signIn } from 'next-auth/react';
 
 const Register = () => {
     const router = useRouter();
@@ -10,8 +11,10 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const searchParams = useSearchParams();
+    const callbackUrl = searchParams.get('callbackUrl') || '/';
 
-    const handleRegister = async(e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
 
         const form = {
@@ -19,10 +22,19 @@ const Register = () => {
             email: e.target.email.value,
             password: e.target.password.value
         }
-        const result =await postUser(form);
-        
+        const result = await postUser(form);
+        if (result.acknowledged) {
+            const result = await signIn('credentials', {
+                email: e.target.email.value,
+                password: e.target.password.value,
+                callbackUrl: callbackUrl
+            },
+            )
+            alert("successfully registered . Now please login !!!");
 
-        router.push('/login');
+        }
+
+
     };
 
     return (
@@ -97,7 +109,7 @@ const Register = () => {
                 <p className="text-sm text-center mt-5">
                     Already have an account?{' '}
                     <span
-                        onClick={() => router.push('/login')}
+                        onClick={() => router.push(`/login?callbackUrl=${callbackUrl}`)}
                         className="text-[oklch(65%_0.23_35)] font-semibold cursor-pointer"
                     >
                         Login

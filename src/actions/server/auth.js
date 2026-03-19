@@ -1,5 +1,6 @@
+'use server'
 import { collections, connect } from "@/lib/dbconnect";
-import bcrypt from 'bcrypt.js'
+import bcrypt from 'bcrypt'
 
 export const postUser=async (payload)=>{
     const {name ,email,password}=payload
@@ -10,8 +11,7 @@ export const postUser=async (payload)=>{
     }
 
     const newUser ={
-        provider:'Credential',
-
+        provider:'credentials',
         name ,
         email,
         password: await bcrypt.hash(password,15),
@@ -26,4 +26,19 @@ export const postUser=async (payload)=>{
         ...result , insertedId:result.insertedId.toString()
     }
      }
+}
+
+
+export const loginUser=async(payload)=>{
+    const {email,password}=payload;
+    if(!email,!password) return null;
+    
+    const user =await connect(collections.USERS).findOne({email});
+    if(!user) return null
+
+    const isExist = await bcrypt.compare(password,user.password);
+    if(isExist)
+        return user;
+    else
+        return null;
 }
