@@ -1,5 +1,8 @@
 import Banner from "@/components/home/Banner";
 import Products from "@/components/home/Products";
+import Test from "@/components/Test";
+import { authOptions } from "@/lib/authOptions";
+import { getServerSession } from "next-auth";
 import Image from "next/image";
 import { Suspense } from "react";
 // app/page.tsx  (Homepage)
@@ -27,17 +30,28 @@ export const metadata = {
 };
 
 // ... rest of your page component
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+  
+
   return (
     <div className='space-y-12'>
-        <section>
-            <Banner></Banner>
-        </section>
-        <section>
-            <Suspense >
-                <Products></Products>
-            </Suspense>
-        </section>
+
+      <Test></Test>
+
+      <p>
+        {
+          JSON.stringify(session)
+        }
+      </p>
+      <section>
+        <Banner></Banner>
+      </section>
+      <section>
+        <Suspense >
+          <Products></Products>
+        </Suspense>
+      </section>
     </div>
   );
 }

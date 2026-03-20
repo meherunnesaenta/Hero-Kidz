@@ -24,15 +24,18 @@ const Register = () => {
         }
         const result = await postUser(form);
         if (result.acknowledged) {
-            const result = await signIn('credentials', {
+            const sign = await signIn('credentials', {
                 email: e.target.email.value,
                 password: e.target.password.value,
-                callbackUrl: callbackUrl
+                callbackUrl 
             },
             )
-            alert("successfully registered . Now please login !!!");
 
         }
+        if (result.ok) {
+           router.push(callbackUrl)
+        }
+        
 
 
     };

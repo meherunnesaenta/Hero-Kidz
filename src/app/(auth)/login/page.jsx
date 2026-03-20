@@ -14,15 +14,26 @@ const Login = () => {
 
   const callbackUrl = searchParams.get('callbackUrl') || '/';
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    signIn('credentials', {
+    const result = await signIn('credentials', {
       email: e.target.email.value,
       password: e.target.password.value,
-      redirect:false
+      redirect: false
     },
     )
+    if (result?.error) {
+      setError(
+        result.error === 'CredentialsSignin'
+          ? 'Email or password is incorrect'
+          : result.error
+      )
+      return
+    }
+    router.push(callbackUrl)
+
+
   };
 
   return (
@@ -77,7 +88,7 @@ const Login = () => {
         </div>
 
         {/* 🔥 Google Sign In Button */}
-          <SocialButton></SocialButton>
+        <SocialButton></SocialButton>
 
         {/* 🔁 Toggle to Register */}
         <p className="text-sm text-center mt-4">

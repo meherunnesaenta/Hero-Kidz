@@ -52,7 +52,8 @@ const ProductDetails = async ({ params }) => {
     ratings,
     sold,
     info,
-    qna
+    qna,
+    _id
   } = product;
   
 
@@ -89,7 +90,7 @@ const ProductDetails = async ({ params }) => {
           </div>
 
           <div className="flex gap-4 pt-2">
-            <AddtoCard product={product}></AddtoCard>
+            <AddtoCard product={{...product,_id: _id.toString()}}></AddtoCard>
             <button className="btn btn-outline">Buy Now</button>
           </div>
 

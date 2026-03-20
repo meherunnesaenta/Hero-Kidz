@@ -7,11 +7,14 @@ const SocialButton = () => {
     const params =useSearchParams();
     const callbackUrl = params.get('callbackUrl') || '/';
 
-    
+    const handleSignIn=()=>{
+        const result= signIn("google", { callbackUrl  })
+        
+    }
     return (
         
         <button
-            onClick={() => signIn("google", { callbackUrl  })}
+            onClick={handleSignIn}
             className="w-full py-2 rounded-lg btn btn-primary btn-outline flex items-center justify-center gap-2"
         >
             <img
