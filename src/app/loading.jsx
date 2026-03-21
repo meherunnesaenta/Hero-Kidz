@@ -26,20 +26,6 @@ const loading = () => {
           </div>
         </div>
 
-        {/* Loading text - subtle and elegant */}
-        <div className="mt-6 text-xl font-medium text-neutral tracking-wide">
-          Loading<span className="animate-pulse">...</span>
-        </div>
-
-        {/* Optional small brand tagline or message */}
-        <p className="mt-2 text-sm text-neutral/60 max-w-xs text-center">
-          Preparing your experience with care
-        </p>
-      </div>
-
-      {/* Very subtle bottom progress bar using built-in animation */}
-      <div className="absolute bottom-10 w-64 h-1 bg-base-200 rounded-full overflow-hidden">
-        <div className="w-1/3 h-full bg-gradient-to-r from-primary via-accent to-primary animate-[move_3s_linear_infinite]" />
       </div>
     </div>
   );
