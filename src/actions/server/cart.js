@@ -58,18 +58,24 @@ export const getCart = async () => {
 export const deleteItems = async (id) => {
     const user = await getServerSession(authOptions);
     if (!user) return [];
-
-    if ( id?.length !== 24) {
+    if (id?.length !== 24) {
         return null;
     }
-
-
     const result = await cartCollection.deleteOne({ _id: new ObjectId(id) });
+    return { success: Boolean(result.deletedCount) }
 
-    if(Boolean(result.deletedCount)){
-        revalidatePath('/cart')
+}
+
+export const updateCart = async (product,inc = true) => {
+    const user = await getServerSession(authOptions);
+    if (!user) return [];
+
+    const updateUser={
+        $inc:{
+            quantity: inc ? 1 : -1
+        }
     }
 
-    return {success:Boolean(result.deletedCount)}
-
+    const result = await cartCollection.updateOne({ email: user?.email, productId: product.productId },updateUser)
+    return {success:Boolean(result.modifiedCount)}
 }

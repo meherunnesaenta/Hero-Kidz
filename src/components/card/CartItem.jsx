@@ -1,21 +1,24 @@
 'use client'
 
-import { deleteItems } from '@/actions/server/cart';
+import { deleteItems, updateCart } from '@/actions/server/cart';
 import React, { useState } from 'react';
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
 
 const CartItem = ({ carts }) => {
   const [quantity, setQuantity] = useState(carts.quantity);
 
-  const handleIncrement = () => {
-    setQuantity(quantity + 1);
-  };
+const handleIncrement = async () => {
+  setQuantity(quantity + 1); 
 
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
+  await updateCart(carts, true); 
+};
+
+const handleDecrement = async () => {
+  if (quantity > 1) {
+    setQuantity(quantity - 1);
+    await updateCart(carts, false); 
+  }
+};
 
   const handleRemove = async() => {
     const result = await deleteItems(carts._id);
@@ -73,7 +76,7 @@ const CartItem = ({ carts }) => {
       {/* Delete Button */}
       <button
         onClick={handleRemove}
-        className="btn btn-sm btn-error ml-4"
+        className="btn btn-sm btn-error ml-4 text-white"
         title="Remove item"
       >
         <FaTrash />
